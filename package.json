@@ -1,0 +1,14 @@
+{
+  "name": "transreport",
+  "version": "1.0.0",
+  "description": "Transreport Task",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Raj Rajnicant",
+  "license": "MIT",
+  "dependencies": {
+    "selenium-webdriver": "^4.1.1"
+  }
+}
