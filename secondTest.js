@@ -25,14 +25,8 @@ async function loginAndProductPriceFilterSuccessAssertion(){
     var inventory_list = await driver.findElements(By.className('inventory_item'));
 
  
-
-
-
-    
-
     // Set filter to PRICE (LOW TO HIGH)
     await driver.findElement(By.xpath('/html/body/div/div/div/div[1]/div[2]/div[2]/span/select/option[3]')).click();
-
 
 
     // get price of products shown
