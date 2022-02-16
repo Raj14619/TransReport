@@ -22,12 +22,11 @@ async function loginAndPasswordSuccessAssertion(){
 
     await driver.findElement(By.id("password")).sendKeys("secret_sauce", Key.ENTER);   
 
-
-    var numOfElements = await (await driver.findElements(By.id("/html/body/div/div/div/div[2]/div/div"))).length;
-    
+    var inventory_list = await driver.findElements(By.className('inventory_item'));
 
 
-    console.log(numOfElements);
+
+    console.log(inventory_list.length);
     
 
 }
