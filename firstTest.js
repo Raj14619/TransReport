@@ -56,7 +56,7 @@ async function loginAndPasswordFailureAssertion(){
     var isLoginPasswordErrorMessageDisplayed = await driver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/div[1]/div/form/div[3]/h3")).isEnabled();
     console.log(isLoginPasswordErrorMessageDisplayed);
 
-    assert.equal(isLoginPasswordErrorMessageDisplayed,"true");
+    assert.equal(isLoginPasswordErrorMessageDisplayed, true);
 }
 
 //loginAndPasswordSuccessAssertion();

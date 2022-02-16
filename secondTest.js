@@ -4,7 +4,7 @@ const assert = require ("assert");
 const { WebElement } = require("selenium-webdriver");
 const { WebDriver } = require("selenium-webdriver");
 
-async function loginAndPasswordSuccessAssertion(){
+async function loginAndProductPriceFilterSuccessAssertion(){
 
     // launch browser
     let driver = await new Builder().forBrowser("chrome").build();
@@ -56,16 +56,30 @@ async function loginAndPasswordSuccessAssertion(){
         console.log(await x);
     }
 
+    var issorted = true;
+
+    for(let x = 0; x < arrayOfPricesWithIntegersOnly.length-1; x++){
+        if(new Number(arrayOfPricesWithIntegersOnly.at(x)) > new Number (arrayOfPricesWithIntegersOnly.at(x+1)) ){
+            issorted = false;
+        console.log("x: "+(arrayOfPricesWithIntegersOnly.at(x))); 
+        console.log("x+1: "+(arrayOfPricesWithIntegersOnly.at(x+1)));
+        
+        }      
+    }
+
+    //console.log(issorted);
+    assert.equal(issorted,true);
+
 
 }
 
 
 
 
-async function loginAndPasswordFailureAssertion(){
+async function loginAndProductPriceFilterFailureAssertion(){
 
-    // launch browser
-    let driver = await new Builder().forBrowser("chrome").build();
+   // launch browser
+   let driver = await new Builder().forBrowser("chrome").build();
 
    // navigate to website
     await driver.get("https://www.saucedemo.com/");
@@ -80,15 +94,48 @@ async function loginAndPasswordFailureAssertion(){
 
     await driver.findElement(By.id("password")).sendKeys("secret_sauce", Key.ENTER);   
 
-    console.log(username);
+    
+    //Get number of products shown
+    var inventory_list = await driver.findElements(By.className('inventory_item'));
 
-    //assert.strictEqual(username,"standard_user");
-         
-    var title = await driver.getElement(By.id(""));
-    console.log(title);
+    console.log(inventory_list.length);
 
-    assert.equal(title,"https://www.saucedemo.com/inventory.html");
+
+    // get price of products shown -INCOMPLETE
+
+    var prices = await driver.findElements(By.className('inventory_item_price'));
+
+
+    var arrayOfPricesWithIntegersOnly = new Array();
+
+
+    for(let e of prices){
+        console.log(await e.getText());
+        var pricesWithoutDollarSign = (await e.getText()).replace('$','');
+        arrayOfPricesWithIntegersOnly.push(pricesWithoutDollarSign);
+    }
+
+
+    for(let x of arrayOfPricesWithIntegersOnly){
+        console.log(await x);
+    }
+
+    var issorted = true;
+
+    for(let x = 0; x < arrayOfPricesWithIntegersOnly.length-1; x++){
+        if(new Number(arrayOfPricesWithIntegersOnly.at(x)) > new Number (arrayOfPricesWithIntegersOnly.at(x+1)) ){
+            issorted = false;
+        console.log("x: "+(arrayOfPricesWithIntegersOnly.at(x))); 
+        console.log("x+1: "+(arrayOfPricesWithIntegersOnly.at(x+1)));
+        
+        }      
+    }
+
+    //console.log(issorted);
+    assert.equal(issorted,false);
+
 
 }
 
-loginAndPasswordSuccessAssertion();
+//loginAndProductPriceFilterSuccessAssertion();
+//loginAndProductPriceFilterFailureAssertion();
