@@ -42,11 +42,19 @@ async function loginAndPasswordSuccessAssertion(){
     var prices = await driver.findElements(By.className('inventory_item_price'));
 
 
+    var arrayOfPricesWithIntegersOnly = new Array();
+
 
     for(let e of prices){
         console.log(await e.getText());
+        var pricesWithoutDollarSign = (await e.getText()).replace('$','');
+        arrayOfPricesWithIntegersOnly.push(pricesWithoutDollarSign);
     }
 
+
+    for(let x of arrayOfPricesWithIntegersOnly){
+        console.log(await x);
+    }
 
 
 }
