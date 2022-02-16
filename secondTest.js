@@ -22,12 +22,32 @@ async function loginAndPasswordSuccessAssertion(){
 
     await driver.findElement(By.id("password")).sendKeys("secret_sauce", Key.ENTER);   
 
+    
+    //Get number of products shown
     var inventory_list = await driver.findElements(By.className('inventory_item'));
 
-
-
     console.log(inventory_list.length);
+
+
+
     
+
+    // Set filter to PRICE (LOW TO HIGH)
+    await driver.findElement(By.xpath('/html/body/div/div/div/div[1]/div[2]/div[2]/span/select/option[3]')).click();
+
+
+
+    // get price of products shown -INCOMPLETE
+
+    var prices = await driver.findElements(By.className('inventory_item_price'));
+
+
+
+    for(let e of prices){
+        console.log(await e.getText());
+    }
+
+
 
 }
 
